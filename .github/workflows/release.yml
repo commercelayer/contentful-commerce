@@ -1,0 +1,34 @@
+name: Release
+on:
+  push:
+    branches: [main, beta, alpha]
+  pull_request:
+    branches: [main, beta, alpha]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: pnpm 🧰
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+
+      - name: Node 🧰
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+          cache: 'pnpm'
+
+      - name: Install 📦
+        run: pnpm install
+
+      - name: Build 🛠
+        run: pnpm build
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npx semantic-release

@@ -1,0 +1,6 @@
+*.js
+.eslintrc
+commitlint.config.js
+build
+public
+lint-staged.config.js
