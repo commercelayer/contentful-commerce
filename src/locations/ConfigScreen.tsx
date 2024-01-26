@@ -14,12 +14,15 @@ import getSchema, { ContentTypeConfiguration } from "../schema";
 
 const createAndPublishContentType = async (
   sdk: ConfigAppSDK,
-  { fields, ...contentType }: ContentTypeConfiguration,
+  { fields, id, ...contentType }: ContentTypeConfiguration,
 ): Promise<void> => {
   try {
+    // @todo: At the moment I'm not able to use the helpText to write into the editor interface.
+    // That's because you can't update without one existing and can't create either.
+    const fieldsWithoutHelpText = fields.map(({ helpText, ...field }) => field);
     const { sys } = await sdk.cma.contentType.createWithId(
-      { contentTypeId: contentType.id },
-      { fields, ...contentType },
+      { contentTypeId: id },
+      { fields: fieldsWithoutHelpText, ...contentType },
     );
 
     await sdk.cma.contentType.publish(
@@ -105,20 +108,18 @@ const ConfigScreen = () => {
   const [parameters, setParameters] = useState<AppInstallationParameters>({});
   const sdk = useSDK<ConfigAppSDK>();
 
-  console.log("Config screen rendered.");
-
   const onConfigure = useCallback(async () => {
     const currentState = await sdk.app.getCurrentState();
     const schema = getSchema({ localized: false, ...parameters });
 
     for (const contentType of schema) {
-      const existingContentType = await sdk.cma.contentType.get({
-        contentTypeId: contentType.id,
-      });
-
-      if (existingContentType) {
+      try {
+        const existingContentType = await sdk.cma.contentType.get({
+          contentTypeId: contentType.id,
+        });
         await updateContentType(sdk, existingContentType, contentType.name);
-      } else {
+      } catch {
+        console.log("doesn't exist", contentType.name);
         await createAndPublishContentType(sdk, contentType);
       }
     }
@@ -180,7 +181,7 @@ const ConfigScreen = () => {
             <Form>
               {configuration.map((field) => {
                 return (
-                  <FormControl isInvalid={false}>
+                  <FormControl isInvalid={false} key={field.name}>
                     <FormControl.Label>{field.label}</FormControl.Label>
                     <TextInput
                       name={field.name}

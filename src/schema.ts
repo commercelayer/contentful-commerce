@@ -4,7 +4,7 @@ export type ContentTypeConfiguration = {
   id: string;
   name: string;
   description: string;
-  fields: ContentTypeField[];
+  fields: ({ helpText: string } & ContentTypeField)[];
   displayField: string;
 };
 
@@ -41,6 +41,7 @@ const getSchema = ({
           name: "Name",
           type: "Symbol",
           required: true,
+          helpText: "The unique name or title of this particular variant.",
           localized,
         },
         {
@@ -48,6 +49,8 @@ const getSchema = ({
           name: "Description",
           type: "Text",
           required: false,
+          helpText:
+            " A description that details the specifics of this variant, such as its unique features or differences from other variants.",
           localized,
         },
         {
@@ -55,6 +58,8 @@ const getSchema = ({
           name: "SKU",
           type: "Symbol",
           required: true,
+          helpText:
+            " Stock Keeping Unit, a unique identifier for each variant used for inventory management.",
           localized,
         },
         {
@@ -66,6 +71,8 @@ const getSchema = ({
             linkType: "Asset",
           },
           required: false,
+          helpText:
+            "Visual representations of the variant, providing a clear and accurate portrayal of the product's appearance.",
           localized,
         },
       ],
@@ -82,6 +89,7 @@ const getSchema = ({
           name: "Name",
           type: "Symbol",
           required: true,
+          helpText: "The product name as it should appear in listings.",
           localized,
         },
         {
@@ -89,6 +97,8 @@ const getSchema = ({
           name: "Description",
           type: "Text",
           required: false,
+          helpText:
+            "Detailed information about the product, including its features and benefits.",
           localized,
         },
         {
@@ -105,6 +115,8 @@ const getSchema = ({
             ],
           },
           required: false,
+          helpText:
+            "Different variations of the product, such as sizes or colors, each with its own SKU.",
           localized,
         },
       ],
@@ -121,6 +133,8 @@ const getSchema = ({
           name: "Name",
           type: "Symbol",
           required: true,
+          helpText:
+            "The name of the category or subcategory as it should be displayed.",
           localized,
         },
         {
@@ -128,6 +142,8 @@ const getSchema = ({
           name: "Description",
           type: "Text",
           required: false,
+          helpText:
+            "An explanation of the category, possibly including what types of products it encompasses.",
           localized,
         },
         {
@@ -144,6 +160,8 @@ const getSchema = ({
             ],
           },
           required: false,
+          helpText:
+            "Subcategories or nested categories within this taxon, allowing for a multi-level taxonomy structure.",
           localized,
         },
         {
@@ -160,6 +178,7 @@ const getSchema = ({
             ],
           },
           required: false,
+          helpText: "Products that fall under this specific category.",
           localized,
         },
       ],
@@ -176,6 +195,8 @@ const getSchema = ({
           name: "Name",
           type: "Symbol",
           required: true,
+          helpText:
+            "The name of the taxonomy, usually representing a broad category.",
           localized,
         },
         {
@@ -183,6 +204,8 @@ const getSchema = ({
           name: "Description",
           type: "Text",
           required: false,
+          helpText:
+            "A general overview of the taxonomy's purpose and what types of products it includes.",
           localized,
         },
         {
@@ -199,6 +222,8 @@ const getSchema = ({
             ],
           },
           required: false,
+          helpText:
+            "The individual categories or 'taxons' that make up the levels of this taxonomy.",
           localized,
         },
       ],
@@ -215,6 +240,8 @@ const getSchema = ({
           name: "Name",
           type: "Symbol",
           required: true,
+          helpText:
+            "The title of the catalog, which may denote its purpose or the collection it represents.",
           localized,
         },
         {
@@ -222,6 +249,8 @@ const getSchema = ({
           name: "Description",
           type: "Text",
           required: false,
+          helpText:
+            "Detailed information about the catalog, including its target audience or the range of products it includes.",
           localized,
         },
         {
@@ -238,6 +267,8 @@ const getSchema = ({
             ],
           },
           required: false,
+          helpText:
+            "The taxonomies included in this catalog, which structure the organization of the products within.",
           localized,
         },
       ],
