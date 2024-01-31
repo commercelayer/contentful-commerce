@@ -9,16 +9,15 @@ jest.mock("@contentful/react-apps-toolkit", () => ({
 }));
 
 describe("Config Screen component", () => {
-  it("Proves that true is true", () => {
-    expect(true).toBeTruthy();
+  it("renders correctly", () => {
+    const { container } = render(<ConfigScreen />);
+    const dynamicAttributeElements = container.querySelectorAll("[id],[for]");
+
+    for (const element of Array.from(dynamicAttributeElements)) {
+      element.removeAttribute("id");
+      element.removeAttribute("for");
+    }
+
+    expect(container.firstChild).toMatchSnapshot();
   });
-  // it("Component text exists", async () => {
-  //   const { getByText } = render(<ConfigScreen />);
-  //   // simulate the user clicking the install button
-  //   await mockSdk.app.onConfigure.mock.calls[0][0]();
-  //   expect(
-  //     getByText("Welcome to your contentful app. This is your config page."),
-  //     // @ts-ignore: This is coming from Contentful create app.
-  //   ).toBeInTheDocument();
-  // });
 });
