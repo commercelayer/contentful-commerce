@@ -1,0 +1,33 @@
+name: Upload
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: pnpm 🧰
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 8
+
+      - name: Node 🧰
+        uses: actions/setup-node@v3
+        with:
+          node-version: "latest"
+          cache: "pnpm"
+
+      - name: Install 📦
+        run: pnpm install
+
+      - name: Build 🛠
+        run: pnpm build
+      - name: Upload package
+        env:
+          CONTENTFUL_ORG_ID: ${{ secrets.CONTENTFUL_ORG_ID }}
+          CONTENTFUL_APP_DEF_ID: ${{ secrets.CONTENTFUL_APP_DEF_ID }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+        run: pnpm upload-ci
