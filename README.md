@@ -3,7 +3,7 @@
 ![Contentful Commerce by Commerce Layer](/public/assets//header-light.png#gh-light-mode-only)
 ![Contentful Commerce by Commerce Layer](/public/assets//header-dark.png#gh-dark-mode-only)
 
-[![Install to Contentful](https://www.ctfstatic.com/button/install-small.svg)](https://app.contentful.com/deeplink?link=apps&id=3PR7dXugLxUvEuINOVHHSQ&referrer=commercelayer)
+[![Install to Contentful](https://www.ctfstatic.com/button/install-small.svg)](https://app.contentful.com/deeplink?link=apps&id=5AuHBmPgmRNIwuxHhVu9PD&referrer=commercelayer)
 
 ## Introduction
 
