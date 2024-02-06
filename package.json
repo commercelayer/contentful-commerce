@@ -22,16 +22,15 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
+    "install-ci": "npm ci",
+    "lint": "eslint .",
+    "format": "prettier --write --cache --ignore-unknown .",
     "start": "cross-env BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write --cache --ignore-unknown .",
     "create-app-definition": "contentful-app-scripts create-app-definition",
-    "lint": "eslint .",
-    "upload": "contentful-app-scripts upload --bundle-dir ./build",
-    "upload-ci": "contentful-app-scripts upload --ci --bundle-dir ./build --organization-id $CONTENTFUL_ORG_ID --definition-id $CONTENTFUL_APP_DEF_ID --token $CONTENTFUL_ACCESS_TOKEN",
-    "prepare": "husky install"
+    "deploy": "contentful-app-scripts upload --ci --bundle-dir ./build --organization-id $DEFINITIONS_ORG_ID --definition-id 3PR7dXugLxUvEuINOVHHSQ --token $CONTENTFUL_CMA_TOKEN"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -50,14 +49,7 @@
   },
   "devDependencies": {
     "@commercelayer/eslint-config-ts-react": "^1.3.0",
-    "@commitlint/cli": "^18.5.0",
-    "@commitlint/config-conventional": "^18.5.0",
     "@contentful/app-scripts": "1.13.2",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^11.1.0",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.2.6",
-    "@semantic-release/release-notes-generator": "^12.1.0",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "14.1.2",
     "@tsconfig/create-react-app": "2.0.2",
@@ -67,10 +59,8 @@
     "@types/react-dom": "18.2.18",
     "cross-env": "7.0.3",
     "eslint": "^8.56.0",
-    "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.4",
-    "semantic-release": "^23.0.0",
     "typescript": "4.9.5"
   },
   "homepage": "."

@@ -11,11 +11,13 @@ jest.mock("@contentful/react-apps-toolkit", () => ({
 describe("Config Screen component", () => {
   it("renders correctly", () => {
     const { container } = render(<ConfigScreen />);
-    const dynamicAttributeElements = container.querySelectorAll("[id],[for]");
+    const dynamicAttributeElements =
+      container.querySelectorAll("[id],[for],[class]");
 
     for (const element of Array.from(dynamicAttributeElements)) {
       element.removeAttribute("id");
       element.removeAttribute("for");
+      element.removeAttribute("class");
     }
 
     expect(container.firstChild).toMatchSnapshot();
